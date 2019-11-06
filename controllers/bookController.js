@@ -2,41 +2,45 @@ var routes = require('express').Router();
 var db = require('../dao/db');
 var bookDao = require('../dao/bookDao');
 
-routes.get('/book',function(req,res){
-    bookDao.getAllBooks(function(error, result){
-      if(error) throw error;
-      res.setHeader('Content-Type', 'application/json');
-      res.send(result);
-    });
+routes.get('/books', function (req, res) {
+  bookDao.getAllBooks(function (error, result) {
+    if (error) throw error;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(result);
+  });
 });
 
-routes.post('/book', function(req, res){
+routes.post('/books', function (req, res) {
   var book = req.body;
-  bookDao.addBook(book, function(err, result){
-    if(err){
+  bookDao.addBook(book, function (err, result) {
+    if (err) {
       res.status(400);
       res.send('Add Book Failed!');
     }
-    res.status(201);
-    res.send('Add Book Successful!');
+    else {
+
+      res.status(201);
+      res.send('Add Book Successful!');
+    }
   });
 });
 
-routes.put('/book', function(req, res){
+routes.put('/books', function (req, res) {
   var book = req.body;
-  bookDao.updateBook(book, function(err, result){
-    if(err){
+  bookDao.updateBook(book, function (err, result) {
+    if (err) {
       res.status(400);
       res.send('Update Book Failed!');
     }
-  
-    res.send('Update Book Successful!');
+    else {
+      res.send('Update Book Successful!');
+    }
   });
 });
 
-routes.delete('/book/:id', function(req, res){
-  bookDao.removeBook(req.params.id, function(err, result){
-    if(err){
+routes.delete('/books/:id', function (req, res) {
+  bookDao.removeBook(req.params.id, function (err, result) {
+    if (err) {
       res.status(400);
       res.send('Delete Book Failed!');
     }

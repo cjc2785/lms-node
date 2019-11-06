@@ -11,7 +11,7 @@ exports.addBook = function (book, cb) {
     if (err) cb(err, null);
 
     db.query(
-      'insert into tbl_book(title, authorId, publisherId) values(?,?)',
+      'insert into tbl_book(title, authorId, publisherId) values(?,?,?)',
       [book.title, book.authorId, book.publisherId],
       function (err, res) {
         if (err) {
@@ -19,9 +19,11 @@ exports.addBook = function (book, cb) {
             cb(err, res);
           });
         }
-        db.commit(function (err, res) {
-          cb(err, res);
-        });
+        else {
+          db.commit(function (err, res) {
+            cb(err, res);
+          });
+        }
       });
   });
 };
@@ -39,9 +41,11 @@ exports.updateBook = function (book, cb) {
             cb(err, res);
           });
         }
-        db.commit(function (err, res) {
-          cb(err, res);
-        });
+        else {
+          db.commit(function (err, res) {
+            cb(err, res);
+          });
+        }
       });
   });
 };
@@ -56,9 +60,11 @@ exports.removeBook = function (bookId, cb) {
           cb(err, res);
         });
       }
-      db.commit(function (err, res) {
-        cb(err, res);
-      });
+      else {
+        db.commit(function (err, res) {
+          cb(err, res);
+        });
+      }
     });
   });
 }
