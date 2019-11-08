@@ -12,14 +12,15 @@ routes.get('/authors', function (req, res) {
 
 routes.post('/authors', function (req, res) {
   var author = req.body;
-  authorDao.addAuthor(author, function (err, result) {
+  authorDao.addAuthor(author, function (err, author) {
     if (err) {
       res.status(400);
       res.send('Add Author Failed!');
     }
     else {
       res.status(201);
-      res.send('Add Author Successful!');
+      console.log('GOT', author);
+      res.json({author});
     }
   });
 });

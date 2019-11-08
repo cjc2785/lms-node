@@ -17,8 +17,9 @@ exports.addAuthor = function (author, cb) {
         });
       }
       else {
+        author.authorId = res.insertId
         db.commit(function (err, res) {
-          cb(err, res);
+          cb(err, author);
         });
       }
     });
