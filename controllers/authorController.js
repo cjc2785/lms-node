@@ -19,7 +19,6 @@ routes.post('/authors', function (req, res) {
     }
     else {
       res.status(201);
-      console.log('GOT', author);
       res.json({author});
     }
   });
